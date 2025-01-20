@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BlockForge Studio - Innowacyjne modyfikacje do Minecrafta">
+    <meta name="theme-color" content="#285d6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>BlockForge Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4f9f7f;
+            --secondary-color: #285d6b;
+            --accent-color: #ff7f50;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f4b4e, #1d3f47, #285d6b);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('minecraft-bg.jpg') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        header h1 {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: background 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 100px 20px;
+            margin: 40px auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 1000px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(79, 159, 127, 0.5),
+                           0 0 20px rgba(79, 159, 127, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(79, 159, 127, 0.8),
+                           0 0 30px rgba(79, 159, 127, 0.5);
+            }
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Mobile Gallery */
+.projects-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Progress Bars */
+.skill-bars {
+    margin: 20px 0;
+}
+
+.skill-bar {
+    margin: 15px 0;
+}
+
+.skill-name {
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0;
+    transition: width 1.5s ease;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    padding: 20px;
+    margin: 20px 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 80%;
+        background: rgba(0,0,0,0.95);
+        padding: 80px 20px;
+        transition: right 0.3s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    section {
+        margin: 20px 10px;
+        padding: 40px 15px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .projects-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 0.9em;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+}
+
+/* Tablet Responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projects-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Loading Animation */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f4b4e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-content {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-content"></div>
+    </div>
+    <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+    <nav>
+        <div class="nav-links">
+            <a href="#about">O nas</a>
+            <a href="#goals">Nasze Cele</a>
+            <a href="#how-we-work">Jak Pracujemy</a>
+            <a href="#contact">Kontakt</a>
+            <a href="#projects">Projekty</a>
+            <a href="#skills">Umiejętności</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>BlockForge Studio</h1>
+        <p>Tworzymy innowacyjne modyfikacje do Minecrafta</p>
+        <a href="#contact" class="cta-button">Dołącz do nas</a>
+    </header>
+
+    <section id="about">
+        <h2>O nas</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-code feature-icon"></i>
+                <h3>Innowacyjne Rozwiązania</h3>
+                <p>Tworzymy zaawansowane mody i pluginy</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users feature-icon"></i>
+                <h3>Społeczność</h3>
+                <p>Współpracujemy z graczami</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-rocket feature-icon"></i>
+                <h3>Wydajność</h3>
+                <p>Dbamy o optymalizację</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="goals">
+        <h2>Nasze Cele</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-chart-line feature-icon"></i>
+                <h3>Optymalizacja</h3>
+                <p>Poprawa wydajności gry</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-lightbulb feature-icon"></i>
+                <h3>Innowacje</h3>
+                <p>Nowe funkcje i mechaniki</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-handshake feature-icon"></i>
+                <h3>Współpraca</h3>
+                <p>Rozwój z społecznością</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-we-work">
+        <h2>Jak Pracujemy</h2>
+        <p>W BlockForge Studio stawiamy na zgrany zespół i innowacyjność. Nasza praca opiera się na ścisłej współpracy, gdzie każdy członek wnosi swoje unikalne umiejętności i pomysły.</p>
+    </section>
+    <section id="projects">
+        <h2>Nasze Projekty</h2>
+        <div class="projects-gallery">
+            <div class="gallery-item">
+                <img src="project1.jpg" alt="Projekt 1">
+            </div>
+            <div class="gallery-item">
+                <img src="project2.jpg" alt="Projekt 2">
+            </div>
+            <div class="gallery-item">
+                <img src="project3.jpg" alt="Projekt 3">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Nasze Umiejętności</h2>
+        <div class="skill-bars">
+            <div class="skill-bar">
+                <div class="skill-name">Minecraft Modding</div>
+                <div class="progress-bar">
+                    <div class="progress" data-width="90%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-name">Plugin Development</div>
+                <div class="progress-bar">
+                    <div class="progress" data-width="85%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-name">Optymalizacja</div>
+                <div class="progress-bar">
+                    <div class="progress" data-width="95%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BlockForge Studio. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // Sticky Navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Mobile Menu Toggle
+const mobileBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// Loading Animation
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    loader.style.display = 'none';
+});
+
+// Animate Progress Bars
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.width;
+        }
+    });
+});
+
+document.querySelectorAll('.progress').forEach((progress) => {
+    observer.observe(progress);
+});
+    </script>
+</body>
+</html>
